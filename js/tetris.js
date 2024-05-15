@@ -127,37 +127,46 @@ function clearLines() {
     }
 }
 
-function keyPress( key ) {
-    switch ( key ) {
+function moveLeft() {
+    if (valid(-1)) {
+        --currentX;
+    }
+}
+
+function moveDown() {
+    if (valid(0, 1)) {
+        ++currentY;
+    }
+}
+
+function keyPress(key) {
+    switch (key) {
         case 'left':
-            if ( valid( -1 ) ) {
-                --currentX;
-            }
+            moveLeft();
             break;
         case 'right':
-            if ( valid( 1 ) ) {
+            if (valid(1)) {
                 ++currentX;
             }
             break;
         case 'down':
-            if ( valid( 0, 1 ) ) {
-                ++currentY;
-            }
+            moveDown();
             break;
         case 'rotate':
-            var rotated = rotate( current );
-            if ( valid( 0, 0, rotated ) ) {
+            var rotated = rotate(current);
+            if (valid(0, 0, rotated)) {
                 current = rotated;
             }
             break;
         case 'drop':
-            while( valid(0, 1) ) {
+            while (valid(0, 1)) {
                 ++currentY;
             }
             tick();
             break;
     }
 }
+
 
 // checks if the resulting position of current shape will be feasible
 function valid( offsetX, offsetY, newCurrent ) {
