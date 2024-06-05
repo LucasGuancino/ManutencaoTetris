@@ -78,7 +78,9 @@ function tick() {
         valid(0, 1);
         clearLines();
         if (lose) {
-            clearAllIntervals();
+            clearAllIntervals();//
+            document.getElementById('gameOverMessage').style.display = 'block';//
+            document.getElementById('playbutton').disabled = false;//
             return false;
         }
         newShape();
@@ -216,8 +218,9 @@ function valid( offsetX, offsetY, newCurrent ) {
 }
 
 function playButtonClicked() {
-    newGame();
-    document.getElementById("playbutton").disabled = true;
+    document.getElementById('gameOverMessage').style.display = 'none';//
+    newGame();//
+    document.getElementById("playbutton").disabled = true;//
 }
 
 function newGame() {
