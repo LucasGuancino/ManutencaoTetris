@@ -160,25 +160,35 @@ function rotate( current ) {
     return newCurrent;
 }
 
-// check if any lines are filled and clear them
+// Verofoca se a linha será limpa
 function clearLines() {
-    for ( var y = ROWS - 1; y >= 0; --y ) {
-        var rowFilled = true;
-        for ( var x = 0; x < COLS; ++x ) {
-            if ( board[ y ][ x ] == 0 ) {
-                rowFilled = false;
-                break;
-            }
+    for (var y = ROWS - 1; y >= 0; --y) {
+        if (isRowFilled(y)) {
+            clearAndMoveLines(y);
         }
-        if ( rowFilled ) {
-            document.getElementById( 'clearsound' ).play();
-            for ( var yy = y; yy > 0; --yy ) {
-                for ( var x = 0; x < COLS; ++x ) {
-                    board[ yy ][ x ] = board[ yy - 1 ][ x ];
-                }
-            }
-            ++y;
+    }
+}
+
+// Verifica se a linha está preenchida
+function isRowFilled(y) {
+    for (var x = 0; x < COLS; ++x) {
+        if (board[y][x] == 0) {
+            return false;
         }
+    }
+    return true;
+}
+
+// Limpa a linha e move as linhas acima para baixo
+function clearAndMoveLines(y) {
+    document.getElementById('clearsound').play();
+    for (var yy = y; yy > 0; --yy) {
+        for (var x = 0; x < COLS; ++x) {
+            board[yy][x] = board[yy - 1][x];
+        }
+    }
+    for (var x = 0; x < COLS; ++x) {
+        board[0][x] = 0;
     }
 }
 
