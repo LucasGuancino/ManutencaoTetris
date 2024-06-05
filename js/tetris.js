@@ -7,6 +7,8 @@ var current; // current moving shape
 var currentX, currentY; // position of current shape
 var freezed; // is current shape settled on the board?
 var nextPiece; // Variavel para gerar a proxima 
+var score; // pontuação do jogador
+var highscore; // melhor pontuação da sessão
 var shapes = [
     [ 1, 1, 1, 1 ],
     [ 1, 1, 1, 0,
@@ -115,6 +117,9 @@ function init() {
             board[ y ][ x ] = 0;
         }
     }
+    score = 0; 
+    highscore = 0;
+    updateScore();
 }
 
 // keep the element moving down, creating new shapes and clearing lines
@@ -128,7 +133,9 @@ function tick() {
         valid(0, 1);
         clearLines();
         if (lose) {
-            clearAllIntervals();
+            clearAllIntervals();//
+            document.getElementById('gameOverMessage').style.display = 'block';//
+            document.getElementById('playbutton').disabled = false;//
             return false;
         }
         newShape();
@@ -165,6 +172,8 @@ function clearLines() {
     for (var y = ROWS - 1; y >= 0; --y) {
         if (isRowFilled(y)) {
             clearAndMoveLines(y);
+            score += 100; 
+            updateScore();
         }
     }
 }
@@ -253,6 +262,7 @@ function valid( offsetX, offsetY, newCurrent ) {
                     if (offsetY == 1 && freezed) {
                         lose = true; // lose if the current shape is settled at the top most row
                         document.getElementById('playbutton').disabled = false;
+                        updateHighScore();
                     } 
                     return false;
                 }
@@ -263,8 +273,9 @@ function valid( offsetX, offsetY, newCurrent ) {
 }
 
 function playButtonClicked() {
-    newGame();
-    document.getElementById("playbutton").disabled = true;
+    document.getElementById('gameOverMessage').style.display = 'none';//
+    newGame();//
+    document.getElementById("playbutton").disabled = true;//
 }
 
 function newGame() {
@@ -279,4 +290,16 @@ function newGame() {
 function clearAllIntervals(){
     clearInterval( interval );
     clearInterval( intervalRender );
+}
+
+function updateScore() {
+    document.getElementById('score').innerText = score;
+}
+
+function updateHighScore() {
+    if(score > highscore){
+        document.getElementById('highscore').innerText = score;
+    }else{
+        document.getElementById('highscore').innerText = highscore;
+    }
 }
