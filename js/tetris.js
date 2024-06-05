@@ -6,6 +6,7 @@ var intervalRender;
 var current; // current moving shape
 var currentX, currentY; // position of current shape
 var freezed; // is current shape settled on the board?
+var nextPiece; // Variavel para gerar a proxima 
 var shapes = [
     [ 1, 1, 1, 1 ],
     [ 1, 1, 1, 0,
@@ -25,11 +26,20 @@ var colors = [
     'cyan', 'orange', 'blue', 'yellow', 'red', 'green', 'purple'
 ];
 
+function generateRandomPiece() {
+    var id = Math.floor( Math.random() * shapes.length );
+    var shape = shapes[ id ]; // maintain id for color filling
+    return { shape: shape, id: id };
+}
+
 // creates a new 4x4 shape in global variable 'current'
 // 4x4 so as to cover the size when the shape is rotated
 function newShape() {
-    var id = Math.floor( Math.random() * shapes.length );
-    var shape = shapes[ id ]; // maintain id for color filling
+    if (!nextPiece) {
+        nextPiece = generateRandomPiece();
+    }
+    var id = nextPiece.id;
+    var shape = nextPiece.shape;
 
     current = [];
     for ( var y = 0; y < 4; ++y ) {
@@ -45,11 +55,34 @@ function newShape() {
         }
     }
     
+    nextPiece = generateRandomPiece();
+    drawNextPiece();
+
     // new shape starts to move
     freezed = false;
     // position where the shape will evolve
     currentX = 5;
     currentY = 0;
+}
+
+// Draw the next piece on the nextPieceCanvas
+function drawNextPiece() {
+    const canvas = document.getElementById('nextPieceCanvas');
+    const context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    var shape = nextPiece.shape;
+    var id = nextPiece.id;
+
+    context.fillStyle = colors[id];
+    for (var y = 0; y < 4; ++y) {
+        for (var x = 0; x < 4; ++x) {
+            var i = 4 * y + x;
+            if (typeof shape[i] != 'undefined' && shape[i]) {
+                context.fillRect(x * 20, y * 20, 20, 20);
+            }
+        }
+    }
 }
 
 // clears the board
