@@ -74,12 +74,33 @@ function drawNextPiece() {
     var shape = nextPiece.shape;
     var id = nextPiece.id;
 
+    // Calculate the width and height of the piece
+    var minX = 4, maxX = 0, minY = 4, maxY = 0;
+    for (var y = 0; y < 4; ++y) {
+        for (var x = 0; x < 4; ++x) {
+            var i = 4 * y + x;
+            if (shape[i]) {
+                if (x < minX) minX = x;
+                if (x > maxX) maxX = x;
+                if (y < minY) minY = y;
+                if (y > maxY) maxY = y;
+            }
+        }
+    }
+
+    var pieceWidth = maxX - minX + 1;
+    var pieceHeight = maxY - minY + 1;
+
+    // Calculate the offset to center the piece
+    var offsetX = Math.floor((canvas.width - pieceWidth * 20) / 2);
+    var offsetY = Math.floor((canvas.height - pieceHeight * 20) / 2);
+
     context.fillStyle = colors[id];
     for (var y = 0; y < 4; ++y) {
         for (var x = 0; x < 4; ++x) {
             var i = 4 * y + x;
-            if (typeof shape[i] != 'undefined' && shape[i]) {
-                context.fillRect(x * 20, y * 20, 20, 20);
+            if (shape[i]) {
+                context.fillRect(offsetX + (x - minX) * 20, offsetY + (y - minY) * 20, 20, 20);
             }
         }
     }
