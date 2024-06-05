@@ -26,9 +26,10 @@ var colors = [
     'cyan', 'orange', 'blue', 'yellow', 'red', 'green', 'purple'
 ];
 
+// Função para gerar uma peça aleatória
 function generateRandomPiece() {
     var id = Math.floor( Math.random() * shapes.length );
-    var shape = shapes[ id ]; // maintain id for color filling
+    var shape = shapes[ id ];
     return { shape: shape, id: id };
 }
 
@@ -65,7 +66,7 @@ function newShape() {
     currentY = 0;
 }
 
-// Draw the next piece on the nextPieceCanvas
+// Desenha a próxima peça no canvas nextPieceCanvas
 function drawNextPiece() {
     const canvas = document.getElementById('nextPieceCanvas');
     const context = canvas.getContext('2d');
@@ -74,7 +75,7 @@ function drawNextPiece() {
     var shape = nextPiece.shape;
     var id = nextPiece.id;
 
-    // Calculate the width and height of the piece
+    // Calcula a largura e altura da peça
     var minX = 4, maxX = 0, minY = 4, maxY = 0;
     for (var y = 0; y < 4; ++y) {
         for (var x = 0; x < 4; ++x) {
@@ -91,7 +92,7 @@ function drawNextPiece() {
     var pieceWidth = maxX - minX + 1;
     var pieceHeight = maxY - minY + 1;
 
-    // Calculate the offset to center the piece
+    // Calcula o offset para centralizar a peça
     var offsetX = Math.floor((canvas.width - pieceWidth * 20) / 2);
     var offsetY = Math.floor((canvas.height - pieceHeight * 20) / 2);
 
