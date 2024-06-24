@@ -133,9 +133,10 @@ function tick() {
         valid(0, 1);
         clearLines();
         if (lose) {
-            clearAllIntervals();//
-            document.getElementById('gameOverMessage').style.display = 'block';//
-            document.getElementById('playbutton').disabled = false;//
+            clearAllIntervals();
+            document.getElementById('gameOverMessage').style.display = 'block';
+            document.getElementById('playbutton').disabled = false;
+            document.getElementById('finalScore').innerText = score; // Atualiza a pontuação final
             return false;
         }
         newShape();
