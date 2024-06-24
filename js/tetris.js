@@ -6,6 +6,7 @@ var intervalRender;
 var current; // current moving shape
 var currentX, currentY; // position of current shape
 var freezed; // is current shape settled on the board?
+var nextPiece; // Variavel para gerar a proxima 
 var score; // pontuação do jogador
 var highscore; // melhor pontuação da sessão
 var shapes = [
@@ -27,11 +28,21 @@ var colors = [
     'cyan', 'orange', 'blue', 'yellow', 'red', 'green', 'purple'
 ];
 
+// Função para gerar uma peça aleatória
+function generateRandomPiece() {
+    var id = Math.floor( Math.random() * shapes.length );
+    var shape = shapes[ id ];
+    return { shape: shape, id: id };
+}
+
 // creates a new 4x4 shape in global variable 'current'
 // 4x4 so as to cover the size when the shape is rotated
 function newShape() {
-    var id = Math.floor( Math.random() * shapes.length );
-    var shape = shapes[ id ]; // maintain id for color filling
+    if (!nextPiece) {
+        nextPiece = generateRandomPiece();
+    }
+    var id = nextPiece.id;
+    var shape = nextPiece.shape;
 
     current = [];
     for ( var y = 0; y < 4; ++y ) {
@@ -47,11 +58,55 @@ function newShape() {
         }
     }
     
+    nextPiece = generateRandomPiece();
+    drawNextPiece();
+
     // new shape starts to move
     freezed = false;
     // position where the shape will evolve
     currentX = 5;
     currentY = 0;
+}
+
+// Desenha a próxima peça no canvas nextPieceCanvas
+function drawNextPiece() {
+    const canvas = document.getElementById('nextPieceCanvas');
+    const context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    var shape = nextPiece.shape;
+    var id = nextPiece.id;
+
+    // Calcula a largura e altura da peça
+    var minX = 4, maxX = 0, minY = 4, maxY = 0;
+    for (var y = 0; y < 4; ++y) {
+        for (var x = 0; x < 4; ++x) {
+            var i = 4 * y + x;
+            if (shape[i]) {
+                if (x < minX) minX = x;
+                if (x > maxX) maxX = x;
+                if (y < minY) minY = y;
+                if (y > maxY) maxY = y;
+            }
+        }
+    }
+
+    var pieceWidth = maxX - minX + 1;
+    var pieceHeight = maxY - minY + 1;
+
+    // Calcula o offset para centralizar a peça
+    var offsetX = Math.floor((canvas.width - pieceWidth * 20) / 2);
+    var offsetY = Math.floor((canvas.height - pieceHeight * 20) / 2);
+
+    context.fillStyle = colors[id];
+    for (var y = 0; y < 4; ++y) {
+        for (var x = 0; x < 4; ++x) {
+            var i = 4 * y + x;
+            if (shape[i]) {
+                context.fillRect(offsetX + (x - minX) * 20, offsetY + (y - minY) * 20, 20, 20);
+            }
+        }
+    }
 }
 
 // clears the board
@@ -81,7 +136,6 @@ function tick() {
             clearAllIntervals();//
             document.getElementById('gameOverMessage').style.display = 'block';//
             document.getElementById('playbutton').disabled = false;//
-            document.getElementById('finalScore').innerText = score; // Atualiza a pontuação final
             return false;
         }
         newShape();
