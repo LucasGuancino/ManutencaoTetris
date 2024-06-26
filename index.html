@@ -12,11 +12,14 @@
             <div style="margin-left: 20px;">Highscore:</div>
             <div id="highscore"></div>
         </div>
-        <canvas id="gameCanvas" width="300" height="600"></canvas>
-        <canvas id="nextPieceCanvas" width="100" height="100"></canvas>
+        <canvas width="300" height="600"></canvas>
         <div class="header">
             <button id="playbutton" onclick="playButtonClicked();">Jogar</button>
             <div id="gameOverMessage">Game Over! Click to restart!</div>
+        </div>
+        <div id="nextPiece">
+            <div>Próxima Peça:</div>
+            <canvas id="nextPieceCanvas" width="80" height="80"></canvas>
         </div>
         <script src='js/tetris.js'></script>
         <script src='js/controller.js'></script>

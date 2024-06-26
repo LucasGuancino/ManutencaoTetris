@@ -53,3 +53,14 @@ canvas {
     padding: 20px;
     border-radius: 10px;
 }
+
+#nextPieceCanvas {
+    border: 1px solid black;
+}
+
+#nextPiece {
+    position: absolute;
+    top: 5%;
+    left: 60%;
+    text-align: center;
+}

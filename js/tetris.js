@@ -6,7 +6,7 @@ var intervalRender;
 var current; // current moving shape
 var currentX, currentY; // position of current shape
 var freezed; // is current shape settled on the board?
-var nextPiece; // Variavel para gerar a proxima 
+var nextPiece; // Variavel para gerar a proxima peça
 var score; // pontuação do jogador
 var highscore; // melhor pontuação da sessão
 var shapes = [
@@ -35,8 +35,8 @@ function generateRandomPiece() {
     return { shape: shape, id: id };
 }
 
-// creates a new 4x4 shape in global variable 'current'
-// 4x4 so as to cover the size when the shape is rotated
+// Cria uma nova peça 4x4 na variável global 'current'
+// 4x4 para cobrir o tamanho quando a forma é rotacionada
 function newShape() {
     if (!nextPiece) {
         nextPiece = generateRandomPiece();
@@ -61,10 +61,10 @@ function newShape() {
     nextPiece = generateRandomPiece();
     drawNextPiece();
 
-    // new shape starts to move
+    // A nova peça começa a se mover
     freezed = false;
-    // position where the shape will evolve
-    currentX = 5;
+    // Posição onde a peça evoluirá
+    currentX = 4;
     currentY = 0;
 }
 
@@ -98,8 +98,8 @@ function drawNextPiece() {
     var offsetX = Math.floor((canvas.width - pieceWidth * 20) / 2);
     var offsetY = Math.floor((canvas.height - pieceHeight * 20) / 2);
 
-    context.fillStyle = colors[id];
-    for (var y = 0; y < 4; ++y) {
+    context.fillStyle = colors[id]; // Define a cor da peça
+    for (var y = 0; y < 4; ++y) { 
         for (var x = 0; x < 4; ++x) {
             var i = 4 * y + x;
             if (shape[i]) {
