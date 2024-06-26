@@ -330,7 +330,9 @@ function toggleTutorial() {
     var displayStyle = tutorialMessage.style.display;
     if (displayStyle === 'none') {
         tutorialMessage.style.display = 'block';
+        document.getElementById('playbutton').disabled = true;
     } else {
         tutorialMessage.style.display = 'none';
+        document.getElementById('playbutton').disabled = false;
     }
 };
