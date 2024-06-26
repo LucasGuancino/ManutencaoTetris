@@ -8,7 +8,6 @@ var currentX, currentY; // position of current shape
 var freezed; // is current shape settled on the board?
 var nextPiece; // Variavel para gerar a proxima peça
 var score; // pontuação do jogador
-var highscore; // melhor pontuação da sessão
 var shapes = [
     [ 1, 1, 1, 1 ],
     [ 1, 1, 1, 0,
@@ -118,7 +117,7 @@ function init() {
         }
     }
     score = 0; 
-    highscore = 0;
+    loadHighScore();
     updateScore();
 }
 
@@ -264,6 +263,7 @@ function valid( offsetX, offsetY, newCurrent ) {
                         lose = true; // lose if the current shape is settled at the top most row
                         document.getElementById('playbutton').disabled = false;
                         updateHighScore();
+                        document.getElementById('finalhighScore').innerText = highscore;
                     } 
                     return false;
                 }
@@ -297,10 +297,30 @@ function updateScore() {
     document.getElementById('score').innerText = score;
 }
 
+function loadHighScore() {
+    let savedHighScore = localStorage.getItem('highscore');
+    if (savedHighScore !== null) {
+        highscore = parseInt(savedHighScore);
+    } else {
+        highscore = 0;
+    }
+    document.getElementById('highscore').innerText = highscore;
+}
+
+function saveHighScore() {
+    localStorage.setItem('highscore', highscore);
+}
+
 function updateHighScore() {
-    if(score > highscore){
-        document.getElementById('highscore').innerText = score;
-    }else{
+    if (score > highscore) {
+        highscore = score;
+        document.getElementById('highscore').innerText = highscore;
+        saveHighScore();
+    } else {
         document.getElementById('highscore').innerText = highscore;
     }
+}
+
+window.onload = function() {
+    loadHighScore();
 }
