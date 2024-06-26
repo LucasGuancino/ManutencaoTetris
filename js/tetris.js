@@ -136,7 +136,7 @@ function tick() {
             clearAllIntervals();
             document.getElementById('gameOverMessage').style.display = 'block';
             document.getElementById('playbutton').disabled = false;
-            document.getElementById('finalScore').innerText = score; // Atualiza a pontuação final
+            document.getElementById('finalScore').innerText = score; 
             return false;
         }
         newShape();

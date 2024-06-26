@@ -52,6 +52,27 @@ canvas {
     background-color: rgba(0, 0, 0, 0.8);
     padding: 20px;
     border-radius: 10px;
+    text-align: center;
+}
+
+#gameOverMessage p {
+    margin: 10px 0;
+}
+
+#gameOverMessage button:hover {
+    background-color: #ff3939;
+}
+
+#gameOverMessage button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    background-color: #fa4646;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 #nextPieceCanvas {
@@ -63,4 +84,7 @@ canvas {
     top: 5%;
     left: 60%;
     text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
 }

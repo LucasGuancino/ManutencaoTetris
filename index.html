@@ -15,7 +15,12 @@
         <canvas width="300" height="600"></canvas>
         <div class="header">
             <button id="playbutton" onclick="playButtonClicked();">Jogar</button>
-            <div id="gameOverMessage">Fim de Jogo! Pressione jogar para recomeçar. Pontuação Final: <span id="finalScore"></span></div>
+            <div id="gameOverMessage">
+                <p>FIM DE JOGO!</p>
+                <p>Pontuação: <span id="finalScore"></span></p>
+                <p>Melhor Pontuação: <span id="highScore"></span></p>
+                <button onclick="playButtonClicked()">Recomeçar</button>
+            </div>
         </div>
         <div id="nextPiece">
             <div>Próxima Peça:</div>
