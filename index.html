@@ -15,6 +15,7 @@
         <canvas width="300" height="600"></canvas>
         <div class="header">
             <button id="playbutton" onclick="playButtonClicked();">Jogar</button>
+            <button id="tutorialButton" onclick="toggleTutorial();">Tutorial</button>
             <div id="gameOverMessage">
                 <p>FIM DE JOGO!</p>
                 <p>Pontuação: <span id="finalScore"></span></p>
@@ -25,6 +26,14 @@
         <div id="nextPiece">
             <div>Próxima Peça:</div>
             <canvas id="nextPieceCanvas" width="80" height="80"></canvas>
+        </div>
+        <div id="tutorialMessage">
+            <div id="closeButton" onclick="toggleTutorial();">X</div>
+            <p><strong>Como jogar:</strong></p>
+            <p>Setas direcionais < >: movimetam as peças para os lados </p>
+            <p>Seta direcional para cima: muda a posição da peça</p>
+            <p>Seta direcional para baixo: aumenta a velocidade a qual desce as peças</p>
+            <p><strong>Objetivo:</strong> combinar peças para limpar as linhas sem deixar que uma peça toque no topo da tela</p>
         </div>
         <script src='js/tetris.js'></script>
         <script src='js/controller.js'></script>

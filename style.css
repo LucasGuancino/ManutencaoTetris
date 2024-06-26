@@ -22,7 +22,47 @@ canvas {
     align-items: center;
     margin: 10px auto 0;
 }
+#tutorialButton{
+    width: 150px;
+    height: 50px;
+    display: block;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    background-color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 20px;
+}
 
+#tutorialMessage {
+    display: none;
+    position: absolute;
+    top: 37%; /* Ajuste este valor conforme necessário */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 17px;
+    color: white;
+    background-color: #666464;
+    padding: 20px 40px; /* Ajuste o padding horizontal (20px) e vertical (40px) conforme necessário */
+    border-radius: 10px;
+    border: 2px solid #000000cc; /* Especifique a largura (2px) e a cor da borda (#800707cc) */
+    width: 300px; /* Ajuste a largura conforme necessário */
+}
+
+
+#closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+}
+
+#closeButton:hover {
+    color: red; /* Altere a cor do "X" quando o mouse passar por cima */
+}
 #score-container {
     display: flex;
     justify-content: center;

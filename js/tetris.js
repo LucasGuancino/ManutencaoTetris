@@ -324,3 +324,13 @@ function updateHighScore() {
 window.onload = function() {
     loadHighScore();
 }
+
+function toggleTutorial() {
+    var tutorialMessage = document.getElementById('tutorialMessage');
+    var displayStyle = tutorialMessage.style.display;
+    if (displayStyle === 'none') {
+        tutorialMessage.style.display = 'block';
+    } else {
+        tutorialMessage.style.display = 'none';
+    }
+};
