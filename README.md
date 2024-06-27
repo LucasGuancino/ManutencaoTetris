@@ -8,6 +8,8 @@ Foram feitas as seguintes alterações:
 - Criado um quadro que exibe qual será a próxima peça a ser exibida no tabuleiro.
 
 Link do Repositório Original: https://github.com/dionyziz/canvas-tetris
+
+
 License
 =======
 This version of tetris is MIT licensed:
